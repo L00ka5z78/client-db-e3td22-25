@@ -42,6 +42,17 @@ prawidlowa struktura tabeli
         <th>    -kolumna
 
         </th>
+        <td>    -pojedyncza komorka
+        </td>
     </tr>
     </thead>
 </table>
+
+            <td>
+               <a href="/client/{{this.id}}"></a>      -nazwa kolekcji client.json w naszym przypadku i to co wyciagamy
+            </td>
+
+ <a href="mailto:{{this.mail}}" target="_blank">{{this.mail}}</a>  -przekierowanie do skrzynki w nowym oknie po kliknieciu maila
+
+  <form method="POST" action="/client/{{this.id}}?_method=DELETE">  -nadpisanie na posta delete. Idzie metoda post ale
+                                                                    wykonuje delete. method-override app.use(methodOverride('_method'))
