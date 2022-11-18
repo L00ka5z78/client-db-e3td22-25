@@ -56,3 +56,7 @@ prawidlowa struktura tabeli
 
   <form method="POST" action="/client/{{this.id}}?_method=DELETE">  -nadpisanie na posta delete. Idzie metoda post ale
                                                                     wykonuje delete. method-override app.use(methodOverride('_method'))
+
+ <input type="email" name="mail" //*** value="{{client.mail}} ***//"> //domyslan wartosc w formuarzu edycji
+
+ class ValidationError extends Error {}         //tworzymy pusta klase ktora bedzie wyswietlala komuniakty bledu i pozwala rozróznic JSowe bledy od naszych wlasnych zaplanowanych komunikatow bledow

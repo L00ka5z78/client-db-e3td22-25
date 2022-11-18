@@ -1,11 +1,14 @@
-<h2>Adding new client to the base</h2>
+<div class="container">
+
+<h2 class="gray-header">Adding new client to the base</h2>
 <form method="POST" action="/client">
+    <div class="form">
     <label>
         <p>
             E-mail:
         </p>
         <p>
-            <input type="email" name="mail">
+            <input type="email" name="mail" required>
         </p>
 
     </label>
@@ -26,6 +29,7 @@
             <input type="date" name="nextContactAt">
         </p>
 
+
     </label>
     <label>
         <p>
@@ -36,6 +40,8 @@
         </p>
     </label>
     <p>
-        <button type="submit">Save</button>
+        <button type="submit" class="btn btn-success">Save</button>
     </p>
+    </div>
 </form>
+</div>

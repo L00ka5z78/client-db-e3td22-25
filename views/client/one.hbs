@@ -1,12 +1,12 @@
 <div class="container">
-<h2 class="gray-header">{{client.name}}</h2>
+<h2 class="gray-header">Client: {{client.name}}</h2>
 </div>
 
 <div class="container one-customer">
 <table class="header-of-left">
     <tbody>
     <tr>
-        <th>
+        <th class="gray-header">
             E-mail:
         </th>
         <td>
@@ -15,7 +15,7 @@
 
     </tr>
     <tr>
-        <th>
+        <th class="gray-header">
             Name:
         </th>
         <td>
@@ -23,7 +23,7 @@
         </td>
     </tr>
     <tr>
-        <th>
+        <th class="gray-header">
             Next contact at:
         </th>
         <td>
@@ -32,7 +32,7 @@
     </tr>
     {{#if client.notes}}
         <tr>
-            <th>
+            <th class="gray-header">
                 Notes:
             </th>
             <td>
@@ -42,4 +42,19 @@
     {{/if}}
     </tbody>
 </table>
+
+    <p>
+    <form method="GET" action="/client/form/edit/{{client.id}}">
+        <button type="submit" class="btn btn-outline-success btn-lg large-button">Edit Client</button>
+    </form>
+    </p>
+
+    <p>
+    <form method="POST" action="/client/{{client.id}}?_method=DELETE">
+        <button type="submit" class="btn btn-outline-success btn-lg large-button">Delete</button></form>
+    </p>
+
+    <p>
+        {{> go-to-clients}}
+    </p>
 </div>

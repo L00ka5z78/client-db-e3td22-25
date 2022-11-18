@@ -1,40 +1,66 @@
 const express = require('express');
 const {db} = require("../utils/db");
+const {ClientRecords} = require("../records/client-records");
+const {NotFoundError} = require("../utils/error");
 const clientRouter = express.Router();
 
 clientRouter
     .get('/', (req, res) => {
-        res.render('client/list-all', {
+        res.render('client/list-all.hbs', {             // client directory renders list-all.hbs file
             clients: db.getAll()
-        });                                 // client directory renders list-all.hbs file
+        });
     })
 
     .get('/:id', (req, res) => {                    // get one from db and display on home page with given id
-        res.render('client/one', {                  //on client path renders one.hbs file
-            client: db.getOne(req.params.id),       //client in one.hbs  client.name etc
+        const client = db.getOne(req.params.id);         //client (not 'this') in one.hbs  client.name etc
+        if (!client) {
+            throw new NotFoundError();
+        }
+        res.render('client/one.hbs', {                 // client path renders one.hbs file
+            client,
         });
     })
 
     .post('/', (req, res) => {
-        db.create(req.body);              // add one to db and display on home page
-        res.render('client/added', {
+        const id = db.create(req.body);              // create/add one to db and display on home page
+
+        res
+            .status(201)
+            .render('client/added.hbs', {             // client path renders added.hbs file
+                name: req.body.name,
+                id,
+            });
+    })
+
+    .put('/:id', (req, res) => {
+                                                        // modify one from db and display on home page with given id
+        db.update(req.params.id, req.body)          //client (not 'this') in one.hbs  client.name etc
+
+        res.render('client/modified.hbs', {
             name: req.body.name,
+            id: req.params.id,
         });
     })
 
-    .put('/:id', (req, res) => {            // modify one from db and display on home page with given id
-        res.send(' modify');
-    })
-
-    .delete('/:id', (req, res) => {            // delete one from db  with given id
-      db.delete(req.params.id);
-      res.render('client/deleted')              // client directory renders deleted.hbs file
+    .delete('/:id', (req, res) => {
+                                                     //delete one from db  with given id
+        db.delete(req.params.id);               //client (not 'this') in one.hbs  client.name etc
+        res.render('client/deleted.hbs');       // client directory renders deleted.hbs file
     })
 
     .get('/form/add', (req, res) => {            // modify one from db and display on home page with given id
         res.render('client/forms/add');         // path client/forms/ renders add.hbs file
     })
 
+    .get('/form/edit/:id', (req, res) => {                  // modify one from db and display on home page with given id
+        const client = db.getOne(req.params.id);         //client (not 'this') in one.hbs  client.name etc
+        if (!client) {
+            throw new NotFoundError();
+        }
+        res.render('client/forms/edit.hbs', {        // path client/forms/ renders edit.hbs file.
+            client,
+        });
+    })
 
 module.exports = {
     clientRouter,

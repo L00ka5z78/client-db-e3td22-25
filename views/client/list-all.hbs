@@ -1,5 +1,7 @@
 <div class="container">
 <h2 class="gray-header">Customers list</h2>
+</div>
+<div class="container">
 
 <table>
     <thead>
@@ -33,15 +35,18 @@
             <td>
                 <a href="/client/{{this.id}}">Details</a>
                 <form method="POST" action="/client/{{this.id}}?_method=DELETE">
-                    <button type="submit">Delete</button></form>
+                    <button type="submit" class="btn btn-outline-danger">Delete</button>
+                </form>
             </td>
         </tr>
     {{/each}}
     </tbody>
 </table>
+</div>
   <p>
     <form method="GET" action="/client/form/add">
-        <button type="submit">Add new Client</button>
+        <button type="submit" class="btn btn-outline-success btn-lg large-button" >Add new Client</button>
     </form>
   </p>
+</div>
 </div>

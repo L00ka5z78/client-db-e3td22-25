@@ -1,2 +1,10 @@
-<p>Client {{name}} has been added to the base</p>
-{{> go-to-clients}}
+<div class="container">
+    <h2>Client {{name}} has been added to the base</h2>
+    <div class="form">
+        <p>
+            <a href="/client/{{id}}">Go to details</a>
+        </p>
+        {{> go-to-clients}}
+    </div>
+
+</div>

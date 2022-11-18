@@ -4,6 +4,7 @@ const {engine} = require("express-handlebars");
 const {clientRouter} = require("./routers/client");
 const {homeRouter} = require("./routers/home");
 const {db} = require('./utils/db');
+const {handleError} = require("./utils/error");
 
 const app = express();
 
@@ -23,7 +24,7 @@ app.set('view engine', '.hbs');
 app.use('/', homeRouter);
 app.use('/client', clientRouter);
 
-
+app.use(handleError)        //own error handling from error.hbs
 
 
 app.listen(3000, 'localhost', () => {
