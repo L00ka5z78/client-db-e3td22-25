@@ -32,17 +32,22 @@ clientRouter
             });
     })
 
-    .put('/:id', async (req, res) => {
-        const client = db.getOne(req.params.id);
-        client.id = req.body.id
-        await client.update()
+
+
+
+    .put('/:id', (req, res) => {
+        // modify one from db and display on home page with given id
+        db.update(req.params.id, req.body)          //client (not 'this') in one.hbs  client.name etc
 
         res.render('client/modified.hbs', {
-            // name: req.body.name,
-            // id: req.params.id,
-            client,
+            name: req.body.name,
+            id: req.params.id,
         });
     })
+
+
+
+
 
     .delete('/:id', (req, res) => {
                                                          //delete one from db  with given id
